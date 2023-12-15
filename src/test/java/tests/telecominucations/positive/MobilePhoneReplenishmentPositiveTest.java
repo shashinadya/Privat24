@@ -9,9 +9,6 @@ import static constants.Constant.Urls.MOBILE_PAYMENT_URL;
 import pages.telecomunications.MobilePhoneReplenishmentPage;
 
 public class MobilePhoneReplenishmentPositiveTest extends BaseTest {
-    //Узнать почему нельзя вызвать метод selectCardFromWallet без создания объекта, в видео с курса можно
-    private MobilePhoneReplenishmentPage mobilePhoneReplenishmentPage = new MobilePhoneReplenishmentPage(driver);
-
     @Test
     public void checkIsRedirectToAuth() {
         basePage.goToUrl(MOBILE_PAYMENT_URL);
@@ -28,6 +25,7 @@ public class MobilePhoneReplenishmentPositiveTest extends BaseTest {
                 .enterCardFrom(MOBILE_PAYMENT_CARD)
                 .enterCardExpDate(MOBILE_PAYMENT_CARD_EXP_DATE)
                 .enterCvv(MOBILE_PAYMENT_CARD_CVV)
-                .submitToTheCart();
+                .submitToTheCart()
+                .checkPaymentDetailsIsPresentInTheCart("Mobile payment. Phone number +380686979712");
     }
 }

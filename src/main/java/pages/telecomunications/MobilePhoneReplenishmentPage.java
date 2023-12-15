@@ -1,5 +1,6 @@
 package pages.telecomunications;
 
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ public class MobilePhoneReplenishmentPage extends BasePage {
     private final By inputPhoneNumber = By.xpath("//input[@data-qa-node='phone-number']");
     private final By inputAmount = By.xpath("//input[@data-qa-node='amount']");
     private final By buttonSubmitToTheCart = By.xpath("//button[@data-qa-node='submit']");
+    private final By paymentDetails = By.xpath("//div[@data-qa-node='details']");
 
     /**
      * Choose a card from the wallet
@@ -67,7 +69,7 @@ public class MobilePhoneReplenishmentPage extends BasePage {
     }
 
     /**
-     * Ender card cvv
+     * Enter card cvv
      * @param cvv card cvv
      */
     public MobilePhoneReplenishmentPage enterCvv(String cvv){
@@ -80,6 +82,13 @@ public class MobilePhoneReplenishmentPage extends BasePage {
      */
     public MobilePhoneReplenishmentPage submitToTheCart(){
         driver.findElement(buttonSubmitToTheCart).click();
+        return this;
+    }
+
+    public MobilePhoneReplenishmentPage checkPaymentDetailsIsPresentInTheCart(String text){
+        waitElementIsVisible(driver.findElement(paymentDetails));
+        WebElement details = driver.findElement(paymentDetails);
+        Assertions.assertEquals(text, details.getText());
         return this;
     }
 }
